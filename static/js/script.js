@@ -12,7 +12,7 @@ function addleap(yr){
 }
 
 function getYear(){
-    reset();
+    resetDate();
     var birthYear = prompt("Enter Your Birth Year :");
     var age=(2020-birthYear)*365;
     age = age + addleap(birthYear);
@@ -39,7 +39,7 @@ function getYear(){
     document.getElementById('flex-box-result').appendChild(h1);
 }
 
-function reset(){
+function resetDate(){
     if(document.getElementById('getYear'))
     {
         document.getElementById('getYear').remove();
@@ -108,20 +108,44 @@ function rpsFrontEnd(humanImageChoice,botImageChoice,finalMessage){
         'paper': document.getElementById('paper').src,
         'scissor': document.getElementById('scissor').src
     }
-    document.getElementById('rock').remove();
-    document.getElementById('scissor').remove();
-    document.getElementById('paper').remove();
+    document.getElementById('hdiv').remove();
+    document.getElementById('bdiv').remove();
+    document.getElementById('fdiv').remove();
 
     var humanDiv=document.createElement('div');
+    humanDiv.id="hdiv";
     var botDiv=document.createElement('div');
+    botDiv.id="bdiv";
     var finalMessageDiv=document.createElement('div');
+    finalMessageDiv.id="fdiv";
 
-    humanDiv.innerHTML="<img src='"+imageDataBase[humanImageChoice]+"'height=150 width=150 style='box-shadow: 0px 10px 50px rgba(37,50,233,1)'>";
-    botDiv.innerHTML="<img src='"+imageDataBase[botImageChoice]+"'height=150 width=150 style='box-shadow: 0px 10px 50px rgba(243,38,24,1)'>";
-    finalMessageDiv.innerHTML="<h1 style='color:"+finalMessage['color']+"; font-size : 60px;padding: 30px'>" + finalMessage['message']+"</h1>";    
+    humanDiv.innerHTML="<img id='HumanChoice' src='"+imageDataBase[humanImageChoice]+"'height=150 width=150 style='box-shadow: 0px 10px 50px rgba(37,50,233,1)'>";
+    botDiv.innerHTML="<img id='BotChoice' src='"+imageDataBase[botImageChoice]+"'height=150 width=150 style='box-shadow: 0px 10px 50px rgba(243,38,24,1)'>";
+    finalMessageDiv.innerHTML="<h1 id= 'TextOut' style='color:"+finalMessage['color']+"; font-size : 60px;padding: 30px'>" + finalMessage['message']+"</h1>";    
 
     document.getElementById('flex-rps').appendChild(humanDiv);
     document.getElementById('flex-rps').appendChild(finalMessageDiv);
     document.getElementById('flex-rps').appendChild(botDiv);
 
+}
+
+function rpsReset(){
+    if (document.getElementById('HumanChoice') )
+    {
+        document.getElementById('HumanChoice').remove();
+        document.getElementById('BotChoice').remove();
+        document.getElementById('TextOut').remove();
+    
+    
+     var rockdiv='<img id="rock" src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200801191404/Untitled-design-55.png" height=150 width=150 onclick="rpsGame(this)">'
+     addCode('hdiv',rockdiv);
+     var paperdiv='<img id="paper" src="https://i.imgur.com/5Pl6g8R.jpg" height=150 width=150 onclick="rpsGame(this)">';
+     addCode('fdiv',paperdiv);
+     var scissordiv='<img id="scissor" src="https://cdn.thewirecutter.com/wp-content/uploads/2017/08/03scissors.jpg" height=150 width=150 onclick="rpsGame(this)">';
+     addCode('bdiv',scissordiv);
+    }
+}
+
+function addCode(id,lnk) { 
+    document.getElementById(id).innerHTML +=lnk;
 }
