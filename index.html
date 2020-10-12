@@ -16,7 +16,7 @@
             </div>
 
             <div>
-                <button  class="btn btn-danger" onclick="reset()">Reset</button>
+                <button  class="btn btn-danger" onclick="resetDate()">Reset</button>
             </div>
         </div>
         <div class="flex-box-container-1">
@@ -36,10 +36,19 @@
     <div class="container-3">
         <h2>Challenge 3 : Rock Paper Scissors !</h2>
         <div class="flex-box-container-3" id="flex-rps">
-            <img id="rock" src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200801191404/Untitled-design-55.png" height=150 width=150 onclick="rpsGame(this)">
+            <div id='hdiv'>
+                <img id="rock" src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200801191404/Untitled-design-55.png" height=150 width=150 onclick="rpsGame(this)">
+            </div>
+            <div id='fdiv'>
             <img id="paper" src="https://i.imgur.com/5Pl6g8R.jpg" height=150 width=150 onclick="rpsGame(this)">
+            </div>
+            <div id='bdiv'>
             <img id="scissor" src="https://cdn.thewirecutter.com/wp-content/uploads/2017/08/03scissors.jpg" height=150 width=150 onclick="rpsGame(this)">
-
+            </div>
+        </div>
+        
+        <div class="flex-box-container-3" id="flex-btn">
+            <button class="btn btn-info" onclick="rpsReset()">Play Again</button>
         </div>
     </div>
     
