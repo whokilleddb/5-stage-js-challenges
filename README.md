@@ -3,7 +3,7 @@
 <ol>
 <li>Age In Days</li>
 <li>Generate Cats</li>
-<li></li>
+<li>Rock Paper Scissors</li>
 <li></li>
 <li></li>
 <li></li>
@@ -16,3 +16,8 @@
 ***2. Generate Cat Pictures***
 
 `GET SOME CATS !`
+
+***3. Rock Paper Scissors***
+
+`Play Rock Paper Scissors With Them Machines !`
+
