@@ -56,6 +56,8 @@ function generatecat(){
     image.src="https://thecatapi.com/api/images/get?format=src&type=gif&size=small";
     image.id="get-me-cats"
     div.appendChild(image);
+    console.log("MORE CATSSSSSSSSSSSS");
+
 }
 function resetCats()
 {
@@ -156,4 +158,43 @@ function rpsReset(){
 
 function addCode(id,lnk) { 
     document.getElementById(id).innerHTML +=lnk;
+}
+
+//Challenge 4 : Change Colour Of All Buttons
+var all_buttons=document.getElementsByTagName('button');
+console.log(all_buttons);
+var copyAllButtons=[];
+
+for (let i=0; i< all_buttons.length;i++){
+    copyAllButtons.push(all_buttons[i].classList[1]);
+}
+console.log(copyAllButtons);
+
+function buttonRemoveAll(){
+    for (let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+    }
+}
+
+function buttonColour(colourOfButton){
+    buttonRemoveAll();
+    for (let i=0;i<all_buttons.length;i++){
+    all_buttons[i].classList.add(colourOfButton);
+    }
+}
+
+function buttonReset(){
+    buttonRemoveAll();
+    for (let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.add(copyAllButtons[i]);
+        }
+
+}
+
+function buttonRandom(){
+    var choices=['btn-primary','btn-secondary','btn-success','btn-danger','btn-warning','btn-dark'];
+    buttonRemoveAll();
+    for (let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.add(choices[(Math.floor(Math.random()*6))]);
+        }
 }
