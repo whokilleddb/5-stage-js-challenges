@@ -53,9 +53,17 @@ function resetDate(){
 function generatecat(){
     var image=document.createElement('img');
     var div=document.getElementById("cat-gen");
-    image.src="https://thecatapi.com/api/images/get?format=src&type=gif&size=small"
+    image.src="https://thecatapi.com/api/images/get?format=src&type=gif&size=small";
+    image.id="get-me-cats"
     div.appendChild(image);
 }
+function resetCats()
+{
+    while(document.getElementById('get-me-cats')){
+        document.getElementById('get-me-cats').remove();
+    }
+}
+
 
 //Challenge 3 : Rock Paper Scissors !
 function rpsGame(yourChoice){
