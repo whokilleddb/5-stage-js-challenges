@@ -4,7 +4,7 @@
 <li>Age In Days</li>
 <li>Generate Cats</li>
 <li>Rock Paper Scissors</li>
-<li></li>
+<li>Change Colour Of All Buttons</li>
 <li></li>
 <li></li>
 </ol>
@@ -21,3 +21,6 @@
 
 `Play Rock Paper Scissors With Them Machines !`
 
+***4. Change Colours Of All Buttons***
+
+`Let's Change Colours !`
