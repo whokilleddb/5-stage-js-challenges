@@ -59,13 +59,13 @@ function generatecat(){
     console.log("MORE CATSSSSSSSSSSSS");
 
 }
+
 function resetCats()
 {
     while(document.getElementById('get-me-cats')){
         document.getElementById('get-me-cats').remove();
     }
 }
-
 
 //Challenge 3 : Rock Paper Scissors !
 function rpsGame(yourChoice){
@@ -197,4 +197,29 @@ function buttonRandom(){
     for (let i=0;i<all_buttons.length;i++){
         all_buttons[i].classList.add(choices[(Math.floor(Math.random()*6))]);
         }
+}
+//Challenge 5 : PLay Blackjack
+let blackjackGame={
+    'you': {
+        'scoreSpan':'#your-blackjack-result',
+        'div':'#your-box',
+        'score':0
+    },
+    'dealer': {
+        'scoreSpan':'#dealer-blackjack-result',
+        'div':'#dealer-box',
+        'score':0
+    }
+}
+const hitSound = new Audio('static/sounds/swish.m4a');
+const YOU = blackjackGame['you'];
+const DEALER = blackjackGame['dealer'];
+document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit);
+
+function blackjackhit(){
+    let cardImage= document.createElement('img');
+    cardImage.src='static/images/Q.png';
+    document.querySelector(YOU['div']).appendChild(cardImage);
+    hitSound.play();
+
 }
