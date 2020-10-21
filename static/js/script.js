@@ -217,6 +217,7 @@ const DEALER = blackjackGame['dealer'];
 document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit);
 
 function blackjackhit(){
+    document.querySelector(YOU['div']).style.height=null;
     let cardImage= document.createElement('img');
     cardImage.src='static/images/Q.png';
     document.querySelector(YOU['div']).appendChild(cardImage);
