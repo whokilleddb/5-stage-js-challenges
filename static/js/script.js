@@ -229,11 +229,13 @@ function blackjackhit(){
 }
 
 function showCard(card,player){
-    let cardImage= document.createElement('img');
-    cardImage.src=`static/images/${card}.png`;
-    cardImage.id='player-card';
-    document.querySelector(player['div']).appendChild(cardImage);
-    hitSound.play();
+    if (player['score']<=21){
+        let cardImage= document.createElement('img');
+        cardImage.src=`static/images/${card}.png`;
+        cardImage.id='player-card';
+        document.querySelector(player['div']).appendChild(cardImage);
+        hitSound.play();
+    }
 }
 
 function resetBoard(){
@@ -241,6 +243,8 @@ function resetBoard(){
     resetImages('dealer-card');
     document.querySelector(YOU['scoreSpan']).textContent = 0;
     document.querySelector(DEALER['scoreSpan']).textContent = 0;
+    YOU['score']=0;
+    DEALER['score']=0;
     document.querySelector(YOU['div']).style.height="350px";
     document.querySelector(DEALER['div']).style.height="350px";
 }
@@ -251,6 +255,7 @@ function randomCard(){
 }
 
 function updateScore(card,activeplayer){
+    let temp=activeplayer['score'];
     if (card !='A'){
         activeplayer['score'] += blackjackGame['cardsMap'][card];
     }
