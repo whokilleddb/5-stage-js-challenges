@@ -220,6 +220,7 @@ const YOU = blackjackGame['you'];
 const DEALER = blackjackGame['dealer'];
 document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit);
 document.querySelector('#blackjack-deal-button').addEventListener('click',resetBoard);
+document.querySelector('#blackjack-stand-button').addEventListener('click',dealerLogic);
 
 function blackjackhit(){
     document.querySelector(YOU['div']).style.height=null;
@@ -284,4 +285,13 @@ function showScore(activeplayer){
         document.querySelector(activeplayer['scoreSpan']).textContent = activeplayer['score'];
     }
     
+}
+
+function dealerLogic(){
+    document.querySelector(YOU['div']).style.height=null;
+    document.querySelector(DEALER['div']).style.height=null;
+    let card = randomCard();
+    updateScore(cardVal,DEALER);
+    showScore(DEALER);
+    showCard(card,DEALER);
 }
