@@ -204,12 +204,14 @@ let blackjackGame={
     'you': {
         'scoreSpan':'#your-blackjack-result',
         'div':'#your-box',
-        'score':0
+        'score':0,
+        'no-bust':0
     },
     'dealer': {
         'scoreSpan':'#dealer-blackjack-result',
         'div':'#dealer-box',
-        'score':0
+        'score':0,
+        'no-bust':0
     },
     'cards':['2','3','4','5','6','7','8','9','10','K','Q','J','A'],
     'cardsMap':{'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'K':10,'Q':10,'J':10,'A':[1,11]}
@@ -248,6 +250,10 @@ function resetBoard(){
     document.querySelector(DEALER['scoreSpan']).textContent = 0;
     YOU['score']=0;
     DEALER['score']=0;
+    console.log(YOU['no-bust']);
+    console.log(DEALER['no-bust']);
+    YOU['no-bust']=0;
+    DEALER['no-bust']=0;
     document.querySelector(YOU['scoreSpan']).style.color = "white";
     document.querySelector(DEALER['scoreSpan']).style.color = "white";
     document.querySelector(YOU['div']).style.height="350px";
@@ -272,6 +278,13 @@ function updateScore(card,activeplayer){
             activeplayer['score'] += blackjackGame['cardsMap']['A'][1];
         }
     }
+
+    if (activeplayer['score'] >21){
+        activeplayer['no-bust']=temp;
+    }
+    else{
+        activeplayer['no-bust']=activeplayer['score'];
+    }
 }
 
 function showScore(activeplayer){
@@ -290,8 +303,8 @@ function showScore(activeplayer){
 function dealerLogic(){
     document.querySelector(YOU['div']).style.height=null;
     document.querySelector(DEALER['div']).style.height=null;
-    let card = randomCard();
-    updateScore(cardVal,DEALER);
+    dealercard = randomCard();
+    updateScore(dealercard,DEALER);
     showScore(DEALER);
-    showCard(card,DEALER);
+    showCard(dealercard,DEALER);
 }
