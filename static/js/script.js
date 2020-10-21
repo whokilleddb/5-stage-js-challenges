@@ -211,6 +211,7 @@ let blackjackGame={
         'score':0
     },
     'cards':['2','3','4','5','6','7','8','9','10','K','Q','J','A'],
+    'cardsMap':{'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'K':10,'Q':10,'J':10,'A':[1,11]}
 }
 const hitSound = new Audio('static/sounds/swish.m4a');
 const YOU = blackjackGame['you'];
@@ -222,6 +223,8 @@ function blackjackhit(){
     document.querySelector(YOU['div']).style.height=null;
     document.querySelector(DEALER['div']).style.height=null;
     cardVal=randomCard();
+    updateScore(cardVal,YOU);
+    showScore(YOU);
     showCard(cardVal,YOU);
 }
 
@@ -236,6 +239,8 @@ function showCard(card,player){
 function resetBoard(){
     resetImages('player-card');
     resetImages('dealer-card');
+    document.querySelector(YOU['scoreSpan']).textContent = 0;
+    document.querySelector(DEALER['scoreSpan']).textContent = 0;
     document.querySelector(YOU['div']).style.height="350px";
     document.querySelector(DEALER['div']).style.height="350px";
 }
@@ -243,4 +248,22 @@ function resetBoard(){
 function randomCard(){
     let randomIndex=Math.floor(Math.random()*13);
     return blackjackGame['cards'][randomIndex];
+}
+
+function updateScore(card,activeplayer){
+    if (card !='A'){
+        activeplayer['score'] += blackjackGame['cardsMap'][card];
+    }
+    else{
+        if((activeplayer['score']+11)>21){
+            activeplayer['score'] += blackjackGame['cardsMap']['A'][0];
+        }
+        else{
+            activeplayer['score'] += blackjackGame['cardsMap']['A'][1];
+        }
+    }
+}
+
+function showScore(activeplayer){
+    document.querySelector(activeplayer['scoreSpan']).textContent = activeplayer['score'];
 }
