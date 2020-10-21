@@ -60,10 +60,10 @@ function generatecat(){
 
 }
 
-function resetCats()
+function resetImages(val)
 {
-    while(document.getElementById('get-me-cats')){
-        document.getElementById('get-me-cats').remove();
+    while(document.getElementById(val)){
+        document.getElementById(val).remove();
     }
 }
 
@@ -209,19 +209,38 @@ let blackjackGame={
         'scoreSpan':'#dealer-blackjack-result',
         'div':'#dealer-box',
         'score':0
-    }
+    },
+    'cards':['2','3','4','5','6','7','8','9','10','K','Q','J','A'],
 }
 const hitSound = new Audio('static/sounds/swish.m4a');
 const YOU = blackjackGame['you'];
 const DEALER = blackjackGame['dealer'];
 document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit);
+document.querySelector('#blackjack-deal-button').addEventListener('click',resetBoard);
 
 function blackjackhit(){
     document.querySelector(YOU['div']).style.height=null;
     document.querySelector(DEALER['div']).style.height=null;
-    let cardImage= document.createElement('img');
-    cardImage.src='static/images/Q.png';
-    document.querySelector(YOU['div']).appendChild(cardImage);
-    hitSound.play();
+    cardVal=randomCard();
+    showCard(cardVal,YOU);
+}
 
+function showCard(card,player){
+    let cardImage= document.createElement('img');
+    cardImage.src=`static/images/${card}.png`;
+    cardImage.id='player-card';
+    document.querySelector(player['div']).appendChild(cardImage);
+    hitSound.play();
+}
+
+function resetBoard(){
+    resetImages('player-card');
+    resetImages('dealer-card');
+    document.querySelector(YOU['div']).style.height="350px";
+    document.querySelector(DEALER['div']).style.height="350px";
+}
+
+function randomCard(){
+    let randomIndex=Math.floor(Math.random()*13);
+    return blackjackGame['cards'][randomIndex];
 }
