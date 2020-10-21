@@ -198,6 +198,7 @@ function buttonRandom(){
         all_buttons[i].classList.add(choices[(Math.floor(Math.random()*6))]);
         }
 }
+
 //Challenge 5 : PLay Blackjack
 let blackjackGame={
     'you': {
@@ -213,6 +214,7 @@ let blackjackGame={
     'cards':['2','3','4','5','6','7','8','9','10','K','Q','J','A'],
     'cardsMap':{'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'K':10,'Q':10,'J':10,'A':[1,11]}
 }
+
 const hitSound = new Audio('static/sounds/swish.m4a');
 const YOU = blackjackGame['you'];
 const DEALER = blackjackGame['dealer'];
@@ -245,6 +247,8 @@ function resetBoard(){
     document.querySelector(DEALER['scoreSpan']).textContent = 0;
     YOU['score']=0;
     DEALER['score']=0;
+    document.querySelector(YOU['scoreSpan']).style.color = "white";
+    document.querySelector(DEALER['scoreSpan']).style.color = "white";
     document.querySelector(YOU['div']).style.height="350px";
     document.querySelector(DEALER['div']).style.height="350px";
 }
@@ -270,5 +274,14 @@ function updateScore(card,activeplayer){
 }
 
 function showScore(activeplayer){
-    document.querySelector(activeplayer['scoreSpan']).textContent = activeplayer['score'];
+    if(activeplayer['score']>21){
+        document.querySelector(activeplayer['scoreSpan']).textContent = "BUSTED";
+        document.querySelector(activeplayer['scoreSpan']).style.color = "red";
+        
+    }
+    else
+    {
+        document.querySelector(activeplayer['scoreSpan']).textContent = activeplayer['score'];
+    }
+    
 }
