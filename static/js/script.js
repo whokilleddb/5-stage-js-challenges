@@ -54,10 +54,8 @@ function generatecat(){
     var image=document.createElement('img');
     var div=document.getElementById("cat-gen");
     image.src="https://thecatapi.com/api/images/get?format=src&type=gif&size=small";
-    image.id="get-me-cats"
+    image.id="get-me-cats";
     div.appendChild(image);
-    console.log("MORE CATSSSSSSSSSSSS");
-
 }
 
 function resetImages(val)
@@ -162,13 +160,11 @@ function addCode(id,lnk) {
 
 //Challenge 4 : Change Colour Of All Buttons
 var all_buttons=document.getElementsByTagName('button');
-console.log(all_buttons);
 var copyAllButtons=[];
 
 for (let i=0; i< all_buttons.length;i++){
     copyAllButtons.push(all_buttons[i].classList[1]);
 }
-console.log(copyAllButtons);
 
 function buttonRemoveAll(){
     for (let i=0;i<all_buttons.length;i++){
@@ -205,13 +201,13 @@ let blackjackGame={
         'scoreSpan':'#your-blackjack-result',
         'div':'#your-box',
         'score':0,
-        'no-bust':0
+        'no-bust':0,
     },
     'dealer': {
         'scoreSpan':'#dealer-blackjack-result',
         'div':'#dealer-box',
         'score':0,
-        'no-bust':0
+        'no-bust':0,
     },
     'cards':['2','3','4','5','6','7','8','9','10','K','Q','J','A'],
     'cardsMap':{'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'K':10,'Q':10,'J':10,'A':[1,11]}
@@ -222,7 +218,7 @@ const YOU = blackjackGame['you'];
 const DEALER = blackjackGame['dealer'];
 document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit);
 document.querySelector('#blackjack-deal-button').addEventListener('click',resetBoard);
-document.querySelector('#blackjack-stand-button').addEventListener('click',dealerLogic);
+document.querySelector('#blackjack-stand-button').addEventListener('click',dealerBot);
 
 function blackjackhit(){
     document.querySelector(YOU['div']).style.height=null;
@@ -258,6 +254,9 @@ function resetBoard(){
     document.querySelector(DEALER['scoreSpan']).style.color = "white";
     document.querySelector(YOU['div']).style.height="350px";
     document.querySelector(DEALER['div']).style.height="350px";
+    document.querySelector('#blackjack-result').textContent="Let's Play!";
+    document.querySelector('#blackjack-result').style.color="#000000";
+    
 }
 
 function randomCard(){
@@ -307,4 +306,53 @@ function dealerLogic(){
     updateScore(dealercard,DEALER);
     showScore(DEALER);
     showCard(dealercard,DEALER);
+    showWinner();
+}
+
+function dealerBot(){
+    do{
+        dealerLogic();
+    }while(DEALER['score']<22);
+}
+
+function getWinner(){
+    if (YOU['score']!=YOU['no-bust']){
+        if (DEALER['score']!=DEALER['no-bust']){
+            return 0.5;
+        }
+        else{
+            return 0;
+        }
+    }
+    else{
+        if (DEALER['score']!=DEALER['no-bust']){
+            return 1;
+        }
+        else if (YOU['no-bust']==DEALER['no-bust']){
+            return 0.5;
+        }
+        else if (YOU['no-bust']<DEALER['no-bust']){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+    }
+}
+
+function showWinner()
+{
+    out=getWinner();
+    if (out==1){
+        document.querySelector('#blackjack-result').textContent="You Win !";
+        document.querySelector('#blackjack-result').style.color="#0dee00";
+    }
+    else if(out==0.5){
+        document.querySelector('#blackjack-result').textContent="Draw!";
+        document.querySelector('#blackjack-result').style.color="#f9d700";
+    }
+    else{
+        document.querySelector('#blackjack-result').textContent="You Lost !";
+        document.querySelector('#blackjack-result').style.color="#e01100";
+    }
 }
