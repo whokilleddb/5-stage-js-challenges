@@ -1,4 +1,4 @@
-# 6 Stage JS Challenges For Beginners
+# 5 Stage JS Challenges For Beginners
 
 <ol>
 <li>Age In Days</li>
